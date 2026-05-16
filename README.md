@@ -170,6 +170,10 @@ Parameters were tuned using the **Ziegler-Nichols** method: Kp was increased unt
 | PI | 0.289 s | 0.678 s | 0% | 0% |
 | PID | 0.322 s | 0.644 s | 0% | 0% |
 
+### MATLAB Simulation
+
+![P vs PI vs PID Response](https://raw.githubusercontent.com/GonzaloGallegoGomez/PID-Motor-Control/main/simulation/matlab/comparison_P_PI_PID.png)
+
 ### Hardware Demo *(coming soon)*
 
 | Demo | Status |
