@@ -43,9 +43,9 @@ display(motor)
 % Empezamos con valores iniciales y los iremos ajustando
 % Método: prueba y error guiado por la respuesta al escalón
 
-Kp = 100;   % Ganancia proporcional
-Ki = 200;   % Ganancia integral
-Kd = 10;    % Ganancia derivativa
+Kp = 0.05;   % Ganancia proporcional
+Ki = 0.3;   % Ganancia integral
+Kd = 0.002;    % Ganancia derivativa
 
 % Creamos el controlador PID
 PID = pid(Kp, Ki, Kd);
@@ -61,7 +61,7 @@ system_PID = feedback(PID * motor, 1);
 % El escalón unitario simula dar una orden de velocidad
 % al motor de golpe (de 0 a setpoint instantáneamente)
 
-t = 0:0.001:2;  % Vector de tiempo: 0 a 2 segundos, paso 1ms
+t = 0:0.0001:2;  % Vector de tiempo: 0 a 2 segundos, paso 1ms
 
 figure('Name', 'PID Motor Control — Step Response', ...
        'Position', [100 100 1000 600]);
