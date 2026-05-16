@@ -162,13 +162,13 @@ Parameters were tuned using the **Ziegler-Nichols** method: Kp was increased unt
 
 > 📊 *Results and response graphs will be added here once hardware testing is complete.*
 
-### MATLAB Simulation *(coming soon)*
+### MATLAB Simulation 
 
-| Controller | Rise time | Overshoot | Steady-state error |
-|---|---|---|---|
-| P only | — | — | — |
-| PI | — | — | — |
-| PID | — | — | — |
+| Controller | Rise time | Settling time | Overshoot | Steady-state error |
+|---|---|---|---|---|
+| P only | 0.054 s | 0.097 s | 0% | ~37% |
+| PI | 0.289 s | 0.678 s | 0% | 0% |
+| PID | 0.322 s | 0.644 s | 0% | 0% |
 
 ### Hardware Demo *(coming soon)*
 
