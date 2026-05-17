@@ -97,7 +97,7 @@ pip install matplotlib numpy pyserial
 
 ## Repository Structure
 
-```
+
 ---
 
 ### Firmware
@@ -123,7 +123,7 @@ pip install matplotlib numpy pyserial
 | File | Description |
 |---|---|
 | [BOM.md](hardware/BOM.md) | Bill of materials with component list, prices and pin connection map |
-```
+
 
 ---
 
@@ -159,19 +159,6 @@ Parameters were tuned using the **Ziegler-Nichols** method: Kp was increased unt
 ### MATLAB Simulation
 
 ![P vs PI vs PID Response](https://raw.githubusercontent.com/GonzaloGallegoGomez/PID-Motor-Control/main/simulation/matlab/comparison_P_PI_PID.png)
-
-### Simulation results
-
-The following graph shows the step response comparison between P, PI and PID controllers
-simulated in MATLAB using the motor's physical transfer function derived from first principles:
-
-![P vs PI vs PID Response](https://raw.githubusercontent.com/GonzaloGallegoGomez/PID-Motor-Control/main/simulation/matlab/comparison_P_PI_PID.png)
-
-| Controller | Rise time | Settling time | Overshoot | Steady-state error |
-|---|---|---|---|---|
-| P only | 0.054 s | 0.097 s | 0% | ~37% |
-| PI | 0.289 s | 0.678 s | 0% | 0% |
-| PID | 0.322 s | 0.644 s | 0% | 0% |
 
 > **Key insight:** The P controller reaches steady state fastest but never eliminates the
 > steady-state error. The PI controller eliminates the error but is slower. The PID controller
