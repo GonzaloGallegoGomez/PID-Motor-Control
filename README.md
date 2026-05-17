@@ -98,45 +98,31 @@ pip install matplotlib numpy pyserial
 ## Repository Structure
 
 ```
-PID-Motor-Control/
-│
-├── README.md
-│
-├── docs/                        # Theory, memory and circuit diagrams
-│   ├── pid_theory.md
-│   └── circuit_diagram.pdf
-│
-├── hardware/                    # Fritzing files and BOM
-│   ├── circuit.fzz
-│   └── BOM.md
-│
-├── firmware/                    # Arduino sketches
-│   ├── 01_encoder_test/
-│   │   └── encoder_test.ino
-│   ├── 02_motor_driver/
-│   │   └── motor_driver.ino
-│   ├── 03_pid_speed/
-│   │   └── pid_speed_control.ino
-│   ├── 04_pid_position/
-│   │   └── pid_position_control.ino
-│   └── 05_cruise_control/
-│       └── cruise_control.ino
-│
-├── simulation/                  # MATLAB/Simulink models and Python scripts
-│   ├── matlab/
-│   │   └── pid_simulation.slx
-│   └── python/
-│       └── plot_response.py
-│
-├── results/                     # Graphs and response curves
-│   ├── p_response.png
-│   ├── pi_response.png
-│   └── pid_response.png
-│
-└── media/                       # Photos, videos and GIFs
-    ├── demo_rpm.gif
-    ├── demo_position.gif
-    └── setup_photo.jpg
+---
+
+### Firmware
+
+| File | Description |
+|---|---|
+| [encoder_test.ino](firmware/01_encoder_test/encoder_test.ino) | Phase 1 — Reads encoder pulses and calculates real-time RPM using hardware interrupts |
+| [motor_driver.ino](firmware/02_motor_driver/motor_driver.ino) | Phase 2 — Controls motor direction and speed via L298N driver using PWM signals |
+| [pid_speed_control.ino](firmware/03_pid_speed/pid_speed_control.ino) | Phase 3 — Full PID closed-loop speed controller with anti-windup and CSV serial output |
+| [pid_position_control.ino](firmware/04_pid_position/pid_position_control.ino) | Phase 4a — PID angular position controller with dead zone and automatic direction control |
+| [cruise_control.ino](firmware/05_cruise_control/cruise_control.ino) | Phase 4b — Cruise control mode with real-time serial commands to activate, deactivate and adjust setpoint |
+
+### Simulation
+
+| File | Description |
+|---|---|
+| [pid_simulation.m](simulation/matlab/pid_simulation.m) | MATLAB script — derives motor transfer function from physical equations and compares P, PI and PID response |
+| [plot_response.py](simulation/python/plot_response.py) | Python — generic real-time serial plotter for PID speed controller |
+| [cruise_control_plotter.py](simulation/python/cruise_control_plotter.py) | Python — cruise control plotter with active zone visualization and setpoint change markers |
+
+### Hardware
+
+| File | Description |
+|---|---|
+| [BOM.md](hardware/BOM.md) | Bill of materials with component list, prices and pin connection map |
 ```
 
 ---
@@ -173,6 +159,23 @@ Parameters were tuned using the **Ziegler-Nichols** method: Kp was increased unt
 ### MATLAB Simulation
 
 ![P vs PI vs PID Response](https://raw.githubusercontent.com/GonzaloGallegoGomez/PID-Motor-Control/main/simulation/matlab/comparison_P_PI_PID.png)
+
+### Simulation results
+
+The following graph shows the step response comparison between P, PI and PID controllers
+simulated in MATLAB using the motor's physical transfer function derived from first principles:
+
+![P vs PI vs PID Response](https://raw.githubusercontent.com/GonzaloGallegoGomez/PID-Motor-Control/main/simulation/matlab/comparison_P_PI_PID.png)
+
+| Controller | Rise time | Settling time | Overshoot | Steady-state error |
+|---|---|---|---|---|
+| P only | 0.054 s | 0.097 s | 0% | ~37% |
+| PI | 0.289 s | 0.678 s | 0% | 0% |
+| PID | 0.322 s | 0.644 s | 0% | 0% |
+
+> **Key insight:** The P controller reaches steady state fastest but never eliminates the
+> steady-state error. The PI controller eliminates the error but is slower. The PID controller
+> combines both — faster settling than PI with zero steady-state error.
 
 ### Hardware Demo *(coming soon)*
 
